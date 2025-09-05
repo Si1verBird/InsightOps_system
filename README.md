@@ -20,7 +20,7 @@ VoC 데이터를 인입/정규화하여 NLP로 분류하고, 정책 기반 인�
 - [서비스별 리포지토리](#서비스별-리포지토리)
 
 ## 📊 MSA 보드
-- [이벤트스토밍 보드]([링크](https://miro.com/app/board/uXjVJQ9PPwo=/?share_link_id=513714152746))
+- [이벤트스토밍 보드](https://miro.com/app/board/uXjVJQ9PPwo=/?share_link_id=513714152746)
 - [서비스 아키텍처 다이어그램](링크)
 
 ## 📑 참고 자료
