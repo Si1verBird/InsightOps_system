@@ -16,13 +16,13 @@ VoC 데이터를 인입/정규화하여 NLP로 분류하고, 정책 기반 인�
 - Infra: Docker, Azure, GitHub Actions(CI/CD)
 
 ## 📂 레포지토리
-- [집계 리포지토리](https://github.com/org/msa-voc-hub)
+- [집계 리포지토리](https://github.com/Si1verBird/InsightOps_system.git)
 - [서비스별 리포지토리](#서비스별-리포지토리)
 
 ## 📊 MSA 보드
-- [이벤트스토밍 보드](링크)
+- [이벤트스토밍 보드]([링크](https://miro.com/app/board/uXjVJQ9PPwo=/?share_link_id=513714152746))
 - [서비스 아키텍처 다이어그램](링크)
 
 ## 📑 참고 자료
-- [Notion 문서](링크)
-- [회의록](링크)
+- [Notion 문서](https://silverbirds.notion.site/25cf8f01056180c38be1f1c1cf16e14e?source=copy_link)
+- 위의 노션 링크에 회의록도 나와있음
