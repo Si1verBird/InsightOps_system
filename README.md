@@ -15,6 +15,13 @@ VoC 데이터를 인입/정규화하여 NLP로 분류하고, 정책 기반 인�
 - Frontend: React/Next.js, Tailwind, Recharts
 - Infra: Docker, Azure, GitHub Actions(CI/CD)
 
+## 🐒 배포 URL 및 담당자 이름
+- 관리자 서비스 DB (허은세) : insightops-admin.mysql.database.azure.com
+    1. small-category table
+    2. assignee table
+      * 여긴 DB만 있고 서비스 로직은 없음..
+- 
+
 ## 📂 레포지토리
 - [집계 리포지토리](https://github.com/Si1verBird/InsightOps_system.git)
 - [서비스별 리포지토리](#서비스별-리포지토리)
