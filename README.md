@@ -25,6 +25,13 @@ VoC 데이터를 인입/정규화하여 NLP로 분류하고, 정책 기반 인�
 ## 📂 레포지토리
 - [집계 리포지토리](https://github.com/Si1verBird/InsightOps_system.git)
 - [서비스별 리포지토리](#서비스별-리포지토리)
+- 0. admin (은세) : [admin](https://github.com/Si1verBird/InsightOps_Admin)
+- 1. 인입 (준선) : [voicebot](https://github.com/s4nta1999/InsightOps-realtime-voicebot
+)
+- 2. 정규화 (준선) : [classification](https://github.com/s4nta1999/InsightOps-classfication)
+- 3. 대시보드 (인효) : [backend](https://github.com/inhyokim/insightops-dashboard-backend) / [frontend](https://github.com/inhyokim/insightops-dashboard-frontend)
+- 4. 메일내용생성 (은세) : [mailcontents](https://github.com/Si1verBird/InsightOps_MailContents)
+- 5. 메일보내기 (은선_은세와준선이라는뜻) : [mailsender](https://github.com/Si1verBird/InsightOps_MailSender)
 
 ## 📊 MSA 보드
 - [이벤트스토밍 보드](https://miro.com/app/board/uXjVJQ9PPwo=/?share_link_id=513714152746)
