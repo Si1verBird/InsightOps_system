@@ -62,13 +62,13 @@ AI 기반 실시간 VoC 인입 → 정규화/분류 → 집계/시각화 → 메
 
 | 서비스 | URL |
 |---|---|
-| Admin | https://insightops-admin.azurewebsites.net |
-| Voicebot | https://insightops-voicebot.azurewebsites.net |
-| Classification | https://insightops-classification.azurewebsites.net |
-| Dashboard Backend | https://insightops-dashboard-back.azurewebsites.net |
-| Dashboard Frontend | https://insightops-dashboard-front.azurewebsites.net |
-| Mail Contents | https://insightops-mailcontents.azurewebsites.net |
-| Mail Send | https://insightops-mailsend.azurewebsites.net |
+| Admin | [https://insightops-admin.azurewebsites.net](http://insightops-admin-bnbchyhyc3hzb8ge.koreacentral-01.azurewebsites.net/) |
+| Voicebot | [https://insightops-voicebot.azurewebsites.net](https://insightops-voicebot-aud7gfhwc3fsb3h7.koreacentral-01.azurewebsites.net/) |
+| Classification | [https://insightops-classification.azurewebsites.net](https://insightops-classification-d2acc8afftgmhubt.koreacentral-01.azurewebsites.net) |
+| Dashboard Backend | [https://insightops-dashboard-back.azurewebsites.net](insightops-dashboard-back-a7hwh6hxcqcxcqgh.koreacentral-01.azurewebsites.net) |
+| Dashboard Frontend | [https://insightops-dashboard-front.azurewebsites.net](insightops-dashboard-front-f9ambdbjbje5gbe0.koreacentral-01.azurewebsites.net) |
+| Mail Contents | [https://insightops-mailcontents.azurewebsites.net](https://insightops-mailcontents-effpd4dmepa8czgm.koreacentral-01.azurewebsites.net/) |
+| Mail Send | [https://insightops-mailsend.azurewebsites.net](insightops-mailsend-e4drbwhqhge4bzam.koreacentral-01.azurewebsites.net) |
 
 ---
 
