@@ -1,5 +1,129 @@
 # InsightOps - VoC 분석 및 관리 플랫폼
 
+<!--
+README formatter scaffold
+- 위쪽: 포맷/테이블/이모지로 가독성 강화 (내용 추가이지만 요약/정리용)
+- 아래쪽: "📎 원문(수정 없음)" 섹션에 제공된 텍스트를 한 글자도 바꾸지 않고 그대로 보존
+-->
+
+<div align="center">
+
+# 🧠 InsightOps — VoC 분석 & 집계 리포지토리
+
+AI 기반 실시간 VoC 인입 → 정규화/분류 → 집계/시각화 → 메일 생성·발송까지 이어지는 **MSA 아키텍처** 프로젝트
+
+</div>
+
+---
+
+## 🚀 빠른 시작 (로컬 실행 요약)
+
+| # | 서비스 | 포트 | 실행 명령 |
+|---|---|---|---|
+| 1 | Voicebot Service | 3000 | `cd InsightOps-realtime-voicebot-main && npm install && npm run dev` |
+| 2 | Classification Service | 8080 | `cd InsightOps-classfication-main && ./mvnw spring-boot:run` |
+| 3 | Dashboard Backend | 3001 | `cd InsightOps-dashboard-backend-main && ./gradlew bootRun` |
+| 4 | Dashboard Frontend | 3002 | `cd InsightOps-dashboard-frontend-main && npm install && npm run dev` |
+| 5 | Mail Send Service | 8081 | `cd InsightOps-mail-send-main && ./gradlew bootRun` |
+| 6 | MailContents Service | 8082 | `cd InsightOps_MailContents-main && ./gradlew bootRun` |
+| 7 | Admin Service | 8083 | `cd InsightOps_Admin-main && ./gradlew bootRun` |
+
+> 🔑 **환경변수**  
+> `OPENAI_API_KEY`, `DATABASE_URL`, `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`,  
+> `CLASSIFICATION_SERVICE_URL`, `MAIL_SERVICE_URL`, `DASHBOARD_API_URL`
+
+---
+
+## 🧩 마이크로서비스 & 역할
+
+| 영역 | 서비스명 | 설명 |
+|---|---|---|
+| Frontend | InsightOps-dashboard-frontend | VoC 데이터 시각화 및 관리 대시보드 |
+| Backend | InsightOps-dashboard-backend | 대시보드 API 서버 및 데이터 집계 |
+| Backend | InsightOps-classification | AI 기반 VoC 분류/분석 |
+| Backend | InsightOps-realtime-voicebot | 실시간 AI 음성 상담 |
+| Backend | InsightOps-mail-send | 이메일 발송 |
+| Backend | InsightOps-MailContents | 메일 내용 자동 생성 |
+| Backend | InsightOps-Admin | 데이터베이스 관리 API |
+
+---
+
+## 🗺️ 서비스 호출 흐름(요약)
+
+1) 고객 실시간 상담(Voicebot) → **voc_raw 저장**  
+2) Classification이 자동 분류/분석 → **consulting_classification 저장**  
+3) Dashboard Backend가 집계 생성(스케줄러) → **집계/캐시 테이블 저장**  
+4) Dashboard에서 MailContents 호출 → **Admin/Classification 조회 후 템플릿 구성**  
+5) Mail Send가 **Microsoft Graph API**로 메일 발송
+
+---
+
+## ☁️ Azure 배포 URL
+
+| 서비스 | URL |
+|---|---|
+| Admin | https://insightops-admin.azurewebsites.net |
+| Voicebot | https://insightops-voicebot.azurewebsites.net |
+| Classification | https://insightops-classification.azurewebsites.net |
+| Dashboard Backend | https://insightops-dashboard-back.azurewebsites.net |
+| Dashboard Frontend | https://insightops-dashboard-front.azurewebsites.net |
+| Mail Contents | https://insightops-mailcontents.azurewebsites.net |
+| Mail Send | https://insightops-mailsend.azurewebsites.net |
+
+---
+
+## 🗄️ 데이터베이스 구조(스키마 분리)
+
+| 스키마 | 주요 테이블/특징 |
+|---|---|
+| `admin` | `assignee`, `consulting_category` |
+| `voicebot` | `voc_raw` |
+| `normalization` | `consulting_classification` |
+| `insightops_dashboard` | `message_preview_cache`, `agg_by_category_age_gender`, 일/주/월 집계 |
+
+> 🔒 **원칙**: 서비스 간 통신은 **API Only**, 데이터 FK로 직접 참조하지 않음
+
+---
+
+## 🧪 헬스체크 & 모니터링
+
+- **Actuator**: `/actuator/health`, `/actuator/info`, `/actuator/metrics`
+- **Custom Health**: 각 서비스별 `/api/health`  
+- **스케줄러**: 매분 실행 `@Scheduled(cron = "0 * * * * ?")`  
+- **지표**: 분류 성공률(목표 95%+), 처리 시간, OpenAI 사용량, 재시도 횟수
+
+---
+
+## 📬 메일 생성/발송 플로우(요약)
+
+`Dashboard → MailContents`  
+→ `Admin(담당자/카테고리)` + `Classification(분석결과 최대 3개)` 조회  
+→ **정적 템플릿으로 메일 내용 생성(LLM 없음)**  
+→ `Mail Send`를 통해 **비동기 발송(Microsoft Graph API)**
+
+---
+
+## 🧰 기술 스택
+
+**Frontend**: React 18 + TypeScript + Vite + Tailwind + Recharts  
+**Backend**: Spring Boot 3.x, Java 17, JPA/Hibernate, WebFlux(메일), Next.js(Voicebot)  
+**DB/ORM**: MySQL 8.0, JPA/Hibernate, Prisma  
+**Infra**: Azure, Docker, Azure AD, Actuator
+
+---
+
+## 🧱 Docker 배포
+
+```bash
+docker-compose up -d
+
+# buildx 예시
+docker buildx build --platform linux/amd64 -t insightops-dashboard-backend ./InsightOps-dashboard-backend-main-2 --load
+docker buildx build --platform linux/amd64 -t insightops-classification ./InsightOps-classfication-main --load
+docker buildx build —platform linux/amd64 -t insightops-voicebot ./InsightOps-realtime-voicebot-main —load
+docker buildx build —platform linux/amd64 -t insightops-mail ./InsightOps-mail-send-main —load
+docker buildx build —platform linux/amd64 -t insightops-frontend ./InsightOps-dashboard-frontend-main-2 —load
+
 ### 서비스 소개
 
 InsightOps는 VoC를 실시간으로 수집, 분석하여 비즈니스 인사이트를 제공하는 종합 플랫폼입니다.
